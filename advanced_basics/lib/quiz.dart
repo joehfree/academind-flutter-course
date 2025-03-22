@@ -12,7 +12,19 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget activeScreen = StartScreen();
+  // we will have a null activeScreen at first but will set it at the
+  //initState lifecycle hook called by Flutter.
+  Widget? activeScreen;
+
+  //override the initState method provided by State class.  This fires once after
+  //the object is instantiated.  Here we can reference the switchScreen argument
+  //since it will be set by the time initState is called by Flutter.
+  @override
+  void initState() {
+    activeScreen = StartScreen(switchScreen);
+    //we need to make sure the parent class executes initState as well.
+    super.initState();
+  }
 
   void switchScreen() {
     //setstate causes Flutter to re-execute the build method on the widget so the UI will update
