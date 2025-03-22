@@ -1,3 +1,4 @@
+import 'package:advanced_basics/questions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:advanced_basics/start_screen.dart';
 
@@ -11,6 +12,15 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  Widget activeScreen = StartScreen();
+
+  void switchScreen() {
+    //setstate causes Flutter to re-execute the build method on the widget so the UI will update
+    setState(() {
+      activeScreen = QuestionsScreen();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,7 +36,7 @@ class _QuizState extends State<Quiz> {
               ],
             ),
           ),
-          child: const StartScreen(),
+          child: activeScreen,
         ),
       ),
     );
