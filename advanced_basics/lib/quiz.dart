@@ -2,7 +2,7 @@ import 'package:advanced_basics/questions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:advanced_basics/start_screen.dart';
 import 'package:advanced_basics/data/questions.dart';
-import 'package:advanced_basics/resutls_screen.dart';
+import 'package:advanced_basics/results_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -20,7 +20,6 @@ class _QuizState extends State<Quiz> {
   void switchScreen() {
     //setstate causes Flutter to re-execute the build method on the widget so the UI will update
     setState(() {
-      selectedAnswers = [];
       activeScreen = 'questions-screen';
     });
   }
@@ -44,7 +43,7 @@ class _QuizState extends State<Quiz> {
     }
 
     if (activeScreen == 'results-screen') {
-      screenWidget = const ResutlsScreen();
+      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
     }
 
     return MaterialApp(
