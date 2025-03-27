@@ -35,8 +35,17 @@ class SummaryItem extends StatelessWidget {
                 height: 5,
               ),
               Text(itemData['user_answer']as String,
+              style: TextStyle(
+                color: isCorrectAnswer
+                ? Color.fromARGB(255, 161, 202, 255)
+                : Color.fromARGB(255, 255, 143, 218)
+              )),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(itemData['correct_answer']as String,
               style: const TextStyle(
-                color: Color.fromARGB(255, 202, 171, 252),
+                color: Color.fromARGB(255, 161, 202, 255),
               )),
               const SizedBox(
                 height: 10,
