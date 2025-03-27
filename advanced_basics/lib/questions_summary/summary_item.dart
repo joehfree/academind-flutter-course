@@ -38,6 +38,9 @@ class SummaryItem extends StatelessWidget {
               style: const TextStyle(
                 color: Color.fromARGB(255, 202, 171, 252),
               )),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
