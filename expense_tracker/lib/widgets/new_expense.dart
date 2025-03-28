@@ -6,7 +6,9 @@ import 'package:intl/intl.dart';
 final formatter = DateFormat.yMd();
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.onAddExpense});
+
+  final void Function(Expense expense) onAddExpense;
 
   @override
   State<NewExpense> createState() {
@@ -23,9 +25,38 @@ class _NewExpenseState extends State<NewExpense> {
   void _submitExpenseData() {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
-    if(_titleController.text.trim().isEmpty || amountIsInvalid || _selectedDate == null) {
-      //show error message
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      showDialog(
+        context: context,
+        builder:
+            (ctx) => AlertDialog(
+              title: const Text('Invalid input'),
+              content: const Text(
+                'Please be sure to enter a valid Title, Amount, and Date',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            ),
+      );
+      //we have invalid data, so exit this method.
+      return;
     }
+    widget.onAddExpense(
+      Expense(
+        title: _titleController.text,
+        amount: enteredAmount,
+        date: _selectedDate!,
+        category: _selectedCategory,
+      ),
+    );
   }
 
   void _presentDatePicker() async {
@@ -109,10 +140,10 @@ class _NewExpenseState extends State<NewExpense> {
                         )
                         .toList(),
                 onChanged: (value) {
-                  if(value == null) {
-                      return;
-                    }
-                  setState(() {                    
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
                     _selectedCategory = value;
                   });
                 },
