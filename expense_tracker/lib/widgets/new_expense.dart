@@ -20,6 +20,14 @@ class _NewExpenseState extends State<NewExpense> {
   DateTime? _selectedDate;
   Category _selectedCategory = Category.leisure;
 
+  void _submitExpenseData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if(_titleController.text.trim().isEmpty || amountIsInvalid || _selectedDate == null) {
+      //show error message
+    }
+  }
+
   void _presentDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
@@ -117,11 +125,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-                  print(formatter.format(_selectedDate!));
-                },
+                onPressed: _submitExpenseData,
                 child: const Text('Save Expense'),
               ),
             ],
