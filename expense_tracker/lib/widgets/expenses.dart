@@ -1,7 +1,8 @@
-import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
+import 'package:expense_tracker/widgets/chart/chart.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -69,7 +70,7 @@ class _ExpensesState extends State<Expenses> {
     Widget mainContent = const Center(
       child: Text('Use the plus button to create your first expense entry.'),
     );
-    
+
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
         expenses: _registeredExpenses,
@@ -86,7 +87,7 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text('The Chart'),
+          Chart(expenses: _registeredExpenses),
           //we need to wrap our list with Expanded because it is essentially a column within a column
           Expanded(child: mainContent),
         ],
