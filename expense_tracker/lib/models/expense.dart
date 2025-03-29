@@ -8,12 +8,7 @@ final formatter = DateFormat.yMd();
 //create utility object to provide unique IDs
 const uuid = Uuid();
 
-enum Category {
-  food,
-  travel,
-  leisure,
-  work
-}
+enum Category { food, travel, leisure, work }
 
 //create a map of icons to categories
 const categoryIcons = {
@@ -24,8 +19,12 @@ const categoryIcons = {
 };
 
 class Expense {
-  Expense({required this.title, required this.amount, required this.date, required this.category})
-    : id = uuid.v4();
+  Expense({
+    required this.title,
+    required this.amount,
+    required this.date,
+    required this.category,
+  }) : id = uuid.v4();
 
   final String id;
   final String title;
@@ -41,6 +40,12 @@ class Expense {
 
 class ExpenseBucket {
   const ExpenseBucket({required this.category, required this.expenses});
+
+  //add an alternative constructor for our class which will filter expenses for a specific category
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+    : expenses = allExpenses
+      .where((expense) => expense.category == category)
+      .toList();
 
   final Category category;
   final List<Expense> expenses;
