@@ -5,9 +5,27 @@ var kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 31, 146, 181),
 );
 
+var kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 22, 103, 128),
+);
+
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        cardTheme: const CardTheme().copyWith(
+          color: kDarkColorScheme.secondaryContainer,
+          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
+          ),
+        ),
+      ),
       //we use copyWith so we can override some stuff without having to completely configure the whole ThemeData
       theme: ThemeData().copyWith(
         colorScheme: kColorScheme,
@@ -33,6 +51,7 @@ void main() {
           ),
         ),
       ),
+      themeMode: ThemeMode.system,
       home: const Expenses(),
     ),
   );
