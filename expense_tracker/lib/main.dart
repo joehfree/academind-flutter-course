@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/widgets/expenses.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
-  seedColor: const Color.fromARGB(255, 96, 59, 181),
+  seedColor: const Color.fromARGB(255, 31, 146, 181),
 );
 
 void main() {
@@ -12,12 +12,28 @@ void main() {
       theme: ThemeData().copyWith(
         colorScheme: kColorScheme,
         //again here we're only overriding a couple things instead of creating a whole new AppBarTheme
-        appBarTheme: AppBarTheme().copyWith(
+        appBarTheme: const AppBarTheme().copyWith(
           backgroundColor: kColorScheme.onPrimaryContainer,
           foregroundColor: kColorScheme.primaryContainer,
         ),
+        cardTheme: const CardTheme().copyWith(
+          color: kColorScheme.secondaryContainer,
+          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kColorScheme.primaryContainer,
+          ),
+        ),
+        textTheme: ThemeData().textTheme.copyWith(
+          titleLarge: TextStyle(
+            fontWeight: FontWeight.normal,
+            color: kColorScheme.onSecondaryContainer,
+            fontSize: 18,
+          ),
+        ),
       ),
-      home: Expenses(),
+      home: const Expenses(),
     ),
   );
 }
