@@ -17,6 +17,13 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (ctx, index) => Dismissible(
+        //we'll see the background to a Container widget so we can set its color
+        background: Container(
+          //use theme for our background container color too, and demonstrating how we could override it to change its opacity a little
+          color: Theme.of(context).colorScheme.error.withValues(alpha: 0.75),
+          //we'll reach out to the theme for the margin of our background container here too, so it matches whatever the card is set to
+          margin: EdgeInsets.symmetric(horizontal: Theme.of(context).cardTheme.margin!.horizontal),
+          ),
         key: ValueKey(expenses[index]),
         onDismissed: (dismissDirection) {
           onRemoveExpense(expenses[index]);
